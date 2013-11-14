@@ -11,7 +11,7 @@ set noswapfile
 set nobackup
 set hidden
 
-colorscheme solarized
+colorscheme brookstream
 set number
 set guifont=Monaco:h13
 set background=dark
