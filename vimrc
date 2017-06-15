@@ -16,6 +16,12 @@ Plugin 'elixir-lang/vim-elixir'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'tpope/vim-rails'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'othree/yajs.vim'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'fatih/vim-go'
 
 call vundle#end()
 filetype plugin indent on
@@ -33,7 +39,7 @@ set number
 set guifont=Monaco:h13
 set background=dark
 set linebreak
-set textwidth=100
+set wrap
 set showmatch
 set visualbell
 
@@ -57,6 +63,22 @@ set backspace=indent,eol,start
 
 set switchbuf=useopen
 
+" Max Line Width
+set tw=80
+
+" CTRL-P Ignored Files/Directories
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+" Markdown settings
+let g:vim_markdown_folding_disabled=1
+
+" Gist VIM Settings
+let g:gist_show_privates = 1
+let g:gist_post_private  = 1
+
+" VIM-JSX Settings
+let g:jsx_ext_required = 0 " Allow JSX in .js
+
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
   set mouse=a
@@ -78,7 +100,6 @@ map <leader>; :!
 "cmap berpp bundle exec rake parallel:prepare
 cmap newdb bundle exec rake db:drop; bundle exec rake db:create; bundle exec rake db:migrate; bundle exec rake db:test:prepare
 cmap cac CtrlPClearAllCaches
-cmap jsh JSHint
 
 map! jj <ESC>
 map <F19> :bn<CR>
@@ -113,14 +134,11 @@ let g:miniBufExplForceSyntaxEnable = 1
 " Command P
 let g:CommandTMaxFiles=50000
 
-"autocmd BufNewFile,BufRead *.js setlocal filetype=eruby noexpandtab shiftwidth=4 tabstop=4 ts=4 sts=4
-"autocmd BufNewFile,BufRead *.erb setlocal filetype=eruby noexpandtab shiftwidth=4 tabstop=4 ts=4 sts=4
-"autocmd BufNewFile,BufRead *.html setlocal filetype=html noexpandtab shiftwidth=4 tabstop=4 ts=4 sts=4
-"autocmd BufNewFile,BufRead *.ejs setlocal filetype=html noexpandtab shiftwidth=4 tabstop=4 ts=4 sts=4
-"autocmd BufNewFile,BufRead *.arb setlocal filetype=ruby noexpandtab
-
 " Delete trailing whitespace before save on any kind of file
 "autocmd BufWritePre * :%s/\s\+$//e
+
+" File-extension specific settings
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
 " Toggle between tabs and spaces.
 function! TabToggle4()
@@ -149,4 +167,4 @@ function! TabToggle8()
   endif
 endfunction
 nmap <M-F19> mz:execute TabToggle8()<CR>'z
-" Alt + F19 for 4-space tabs
+" Alt + F19 for 8-space tabs
